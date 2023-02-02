@@ -1,0 +1,19 @@
+#color-palette{
+    display: flex;
+    width: 200px;
+    height: 200px;
+    background-color: #000000;
+}
+.color{
+    flex: 1;
+}
+
+.saving-combination{
+    display: flex;
+    width: 200px;
+    height: 200px;
+    border: 1px solid rgb(228, 228, 228);
+}
+.saving-color{
+    flex: 1;
+}
