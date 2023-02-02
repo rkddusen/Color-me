@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Color, me</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css" />
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+    <script>
+        Coloris({
+            theme: 'polaroid',
+            themeMode: 'auto',
+            alpha: false,
+        });
+    </script>
+</head>
+
+<body>
+    <div id="title">
+        <span onclick="location.reload()">Color, me</span>
+    </div>
+    <div id="contents">
+        <div id="contents-left">
+            <div id="color-input">
+                <input type="text" value="#000000" id="color-value" data-coloris>
+                <button class="btn" onclick="okay();">추가</button>
+            </div>
+            <ol id="color-name">
+
+            </ol>
+        </div>
+        <div id="contents-right">
+            <div id="color-palette">
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="index.js"></script>
+
+</html>
