@@ -21,19 +21,28 @@
         <span onclick="location.reload()">Color, me</span>
     </div>
     <div id="contents">
-        <div id="contents-left">
-            <div id="color-input">
-                <input type="text" value="#000000" id="color-value" data-coloris>
-                <button class="btn" onclick="okay();">추가</button>
+        <div id="contents-top">
+            <div id="contents-left">
+                <div id="color-input">
+                    <input type="text" value="#000000" id="color-value" data-coloris>
+                    <button class="btn" onclick="okay();">추가</button>
+                </div>
+                <ol id="color-name">
+    
+                </ol>
             </div>
-            <ol id="color-name">
-
-            </ol>
+            <div id="contents-right">
+                <div id="color-palette">
+    
+                </div>
+            </div>
         </div>
-        <div id="contents-right">
-            <div id="color-palette">
-
-            </div>
+        <div id="contents-bottom">
+            <button onclick="lightSort(1);">밝은 순</button>
+            <span>|</span>
+            <button onclick="lightSort(-1);">어두운 순</button>
+            <span>|</span>
+            <button onclick="randomSort();">랜덤 순</button>
         </div>
     </div>
 </body>
