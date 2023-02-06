@@ -6,7 +6,8 @@ let hsl = [];
 // 색상을 추가
 function okay() {
     let count = document.getElementsByClassName("color-row").length;
-    if (count === 6) { // 리스트에 있는 색상의 수가 6개일 때
+    if (count === 6) {
+        // 리스트에 있는 색상의 수가 6개일 때
         alert("색상은 6개까지 추가할 수 있습니다.");
     } else {
         count++;
@@ -27,7 +28,8 @@ function plusColor(color_value, count) {
 
     printColor(count);
 
-    if (count === 1) { // 첫번째 리스트가 추가됐을 경우
+    if (count === 1) {
+        // 첫번째 리스트가 추가됐을 경우
         let color_input = document.getElementById("color-input");
         let span = document.createElement("span");
         span.textContent = "|";
@@ -276,3 +278,148 @@ function randomSort() {
         printColor(i);
     }
 }
+
+// localStorage에 저장할 색 조합 개수와 이름 제한
+function saveColor() {
+    // 저장 가능한 색 조합의 수는 30개
+    if (window.localStorage.length < 30) {
+        let saveCheck = confirm("색 조합을 저장하시겠습니까?");
+        if (saveCheck) {
+            let saveName = "";
+            let temp = 0; // 중복된 이름을 입력 받았을 경우에 글귀 변경 목적
+            while (!saveName || window.localStorage.getItem(saveName)) {
+                if (!temp) saveName = prompt("색 조합 이름을 입력하세요.");
+                else
+                    saveName = prompt(
+                        "중복 이름입니다.\n색 조합 이름을 입력하세요."
+                    );
+
+                if (saveName === null) break;
+                else if (saveName === "") temp = 0;
+                else temp = 1;
+            }
+            if (saveName) {
+                save(saveName);
+            }
+        }
+    } else {
+        alert("더 이상 저장할 수 없습니다.\n최대 개수는 30개 입니다.");
+    }
+}
+
+// localStorage에 저장할 색 조합 개수와 이름 제한
+function save(saveName) {
+    let colors = [];
+    for (let i = 0; i < colorArr.length; i++) {
+        colors[i] = colorArr[i].hex;
+    }
+    window.localStorage.setItem(saveName, JSON.stringify(colors));
+
+    alert("저장되었습니다.");
+    // 값을 저장하면 해당 값 추가로 출력
+    printArticleDetail(saveName);
+    init();
+}
+
+// 저장 후 초기 상태로 돌아가기 위한 함수
+function init() {
+    document.getElementById("color-value").value = "#000000";
+    document.getElementsByClassName("clr-field")[0].style.color = "#000000";
+    document.getElementById("color-name").innerHTML = null;
+    document.getElementById("color-palette").innerHTML = null;
+    let color_input = document.getElementById("color-input");
+    // 입력 폼의 두번째 버튼을 삭제하기 위함
+    if (color_input.childNodes.length >= 6) {
+        for (let i = 0; i < color_input.childNodes.length - 4; i++) {
+            color_input.removeChild(color_input.childNodes[5]);
+        }
+    }
+
+    colorArr = [];
+}
+
+// html에 필요한 요소들 생성
+function createBox() {
+    let box = document.createElement("div");
+    box.classList.add("saving-box");
+    let name = document.createElement("div");
+    name.classList.add("saving-name");
+    let comb = document.createElement("div");
+    comb.classList.add("saving-combination");
+    let info = document.createElement("div");
+    info.classList.add("saving-information");
+    let ol = document.createElement("ol");
+    ol.classList.add("saving-ol");
+
+    let btn = document.createElement("div");
+    btn.classList.add("saving-btn");
+
+    return [box, name, comb, info, ol, btn];
+}
+
+// 실질적으로 localStorage에 있는 값들 출력
+function printArticleDetail(saveName) {
+    let value = JSON.parse(window.localStorage.getItem(saveName));
+
+    let elementArr = createBox();
+    let _box = elementArr[0];
+    let _name = elementArr[1];
+    let _comb = elementArr[2];
+    let _info = elementArr[3];
+    let _ol = elementArr[4];
+    let _btn = elementArr[5];
+
+    let _p = document.createElement("p");
+    _p.textContent = saveName;
+    _name.insertAdjacentElement("beforeend", _p);
+
+    for (let i = 0; i < value.length; i++) {
+        let _div = document.createElement("div");
+        _div.classList.add("saving-color");
+        _div.style.backgroundColor = value[i];
+        _comb.insertAdjacentElement("beforeend", _div);
+
+        let _li = document.createElement("li");
+        _li.textContent = value[i];
+        _ol.insertAdjacentElement("beforeend", _li);
+    }
+
+    let _del = document.createElement("button");
+    _del.classList.add("saving-delete");
+    _del.textContent = "삭제";
+    _del.setAttribute("onclick", "deleteSave('" + saveName + "')");
+    let _upd = document.createElement("button");
+    _upd.classList.add("saving-update");
+    _upd.textContent = "수정";
+    _upd.setAttribute("onclick", "updateSave('" + saveName + "')");
+    let _cha = document.createElement("button");
+    _cha.classList.add("saving-change");
+    _cha.textContent = "이름변경";
+    _cha.setAttribute("onclick", "changeName('" + saveName + "')");
+
+    _btn.insertAdjacentElement("beforeend", _del);
+    _btn.insertAdjacentElement("beforeend", _upd);
+    _btn.insertAdjacentElement("beforeend", _cha);
+
+    _info.insertAdjacentElement("beforeend", _ol);
+    _box.insertAdjacentElement("beforeend", _name);
+    _box.insertAdjacentElement("beforeend", _comb);
+    _box.insertAdjacentElement("beforeend", _info);
+    _box.insertAdjacentElement("beforeend", _btn);
+
+    document
+        .getElementById("article")
+        .insertAdjacentElement("beforeend", _box);
+}
+
+// 페이지를 접속했을 때 저장된 값이 다 출력되어 있도록 설정
+function showSaved() {
+    let num = window.localStorage.length;
+    if (num >= 1) {
+        for (let i = 0; i < num; i++) {
+            let key = window.localStorage.key(i);
+            printArticleDetail(key);
+        }
+    }
+}
+showSaved();
