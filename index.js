@@ -3,6 +3,10 @@ let colorArr = [];
 // colorArr에 저장된 색상들을 H, S, L로 변환하여 담을 배열
 let hsl = [];
 
+// 기존 조합을 수정할 저장이면 1, 그냥 새로운 조합 저장이면 0
+let savingUpdateNum = 0;
+let globalSaveName = "";
+
 // 색상을 추가
 function okay() {
     let count = document.getElementsByClassName("color-row").length;
@@ -179,7 +183,13 @@ function UpdatetoAdd() {
     _btn.setAttribute("onclick", "okay()");
     let _btn2 = document.getElementsByClassName("btn")[1];
     _btn2.innerHTML = "저장";
-    _btn2.setAttribute("onclick", "saveColor()");
+
+		// savingUpdateNum에 따라서 새로운 조합을 저장할지, 기존 조합을 저장할지 결정
+    if (savingUpdateNum === 0) {
+        _btn2.setAttribute("onclick", "saveColor()");
+    } else {
+        _btn2.setAttribute("onclick", "resaveColor()");
+    }
 }
 
 // 수정을 취소할 때
@@ -423,3 +433,55 @@ function showSaved() {
     }
 }
 showSaved();
+
+// 저장된 조합 삭제
+function deleteSave(saveName) {
+    if (confirm("조합을 삭제할까요?")) {
+        window.localStorage.removeItem(saveName);
+        alert("'" + saveName + "' 조합이 삭제되었습니다.");
+        location.reload();
+    }
+}
+
+// 저장된 조합 수정
+function updateSave(saveName) {
+    init();
+	// 원래 색 조합을 수정 후, 저장할 때
+    savingUpdateNum = 1;
+    globalSaveName = saveName;
+    let value = JSON.parse(window.localStorage.getItem(saveName));
+    for (let i = 0; i < value.length; i++) {
+        plusColor(value[i], i + 1);
+    }
+    document
+        .getElementsByClassName("btn")[1]
+        .setAttribute("onclick", "resaveColor()");
+}
+
+// 저장된 조합을 수정하고 다시 저장하기
+function resaveColor() {
+    let saveCheck = confirm("색 조합을 저장하시겠습니까?");
+    if (saveCheck) {
+        save(globalSaveName);
+        location.reload();
+    }
+}
+
+// 저장된 조합의 이름 변경
+function changeName(saveName) {
+    let newName = "";
+    while (!newName || window.localStorage.getItem(newName)) {
+        newName = prompt("색 조합 이름을 입력하세요.");
+        if (newName === null) {
+            break;
+        }
+    }
+    if (newName) {
+        window.localStorage.setItem(
+            newName,
+            window.localStorage.getItem(saveName)
+        );
+        window.localStorage.removeItem(saveName);
+        location.reload();
+    }
+}
