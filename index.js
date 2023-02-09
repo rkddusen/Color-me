@@ -39,7 +39,11 @@ function plusColor(color_value, count) {
         span.textContent = "|";
         color_input.appendChild(span);
         let save_btn = document.createElement("button");
-        save_btn.setAttribute("onclick", "saveColor()");
+        if (savingUpdateNum === 0) {
+            save_btn.setAttribute("onclick", "saveColor()");
+        } else {
+            save_btn.setAttribute("onclick", "resaveColor()");
+        }
         save_btn.classList.add("btn");
         save_btn.textContent = "저장";
         color_input.appendChild(save_btn);
