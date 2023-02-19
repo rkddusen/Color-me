@@ -129,7 +129,6 @@ button {
 
 #combinations{
     margin: 50px auto;
-    min-width: 600px;
     padding: 0 30px;
 }
 #combinations > p{
@@ -187,4 +186,88 @@ button {
 }
 .saving-delete:hover, .saving-update:hover, .saving-change:hover{
     font-weight: bold;
+}
+
+@media (max-width : 689px) {
+    body{
+        text-align: center;
+    }
+    #title{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0;
+        min-width: 260px;
+        margin-top: 30px;
+    }
+    #title span{
+        font-size: 30px;
+    }
+    #title p {
+        font-size: 14px;
+    }
+    #contents{
+        padding: 10px;
+        max-width: 280px;
+        width: auto;
+        min-width: 240px;
+        height: 550px;
+    }
+    #contents > div{
+        min-height: 550px;
+    }
+    #contents-top{
+        height: 500px;
+        padding: 15px;
+    }
+    #contents-left, #contents-right{
+        float: unset;
+    }
+    #color-input{
+        text-align: start;
+    }
+    .btn{
+        font-size: 14px;
+    }
+    .color-row{
+        padding-left: 0;
+    }
+    #color-palette{
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+    #contents-bottom{
+        padding: 10px;
+    }
+    #contents-bottom button{
+        font-size: 13px;
+    }
+
+
+
+
+    #combinations{
+        padding: 0 10px;
+        min-width: 240px
+    }
+    #combinations > p{
+        font-size: 20px;
+    }
+    #article{
+        width: 100%;
+        max-width: 300px;
+    }
+    .saving-box{
+        box-sizing: content-box;
+        padding: 0;
+        padding-top: 10px;
+        margin: 20px 0;
+    }
+    .saving-name p{
+        font-size: 18px;
+    }
+    .saving-delete, .saving-update, .saving-change{
+        font-size: 12px;
+    }
 }
