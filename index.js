@@ -489,3 +489,12 @@ function changeName(saveName) {
         location.reload();
     }
 }
+
+// 모달창 닫기
+function closeModal(){
+    document.getElementById("modal-back").style.display = 'none';
+}
+// 모달창 열기
+function openModal(){
+    document.getElementById("modal-back").style.display = 'block';
+}
