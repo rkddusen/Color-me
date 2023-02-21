@@ -17,10 +17,24 @@
 </head>
 
 <body>
+    <div id="modal-back">
+        <div id="modal">
+            <div id="modal-top">
+                <p id="modal-title">Color, me</p>
+                <p id="modal-cancel" onclick="closeModal();">×</p>
+            </div>
+            <div id="modal-content">
+                <p>Color, me는 나만의 색 조합을 저장할 수 있는 사이트입니다.</p>
+                <p>색은 최소 1개부터 최대 6개까지 추가가 가능합니다.</p>
+                <p>조합은 최대 30개까지 저장이 가능합니다.</p>
+                <p>웹사이트의 특성상 저장된 조합은 다른 웹과의 공유가 불가능합니다.</p>
+                <p>ex) 크롬에 저장된 조합은 익스플로러에서 볼 수 없습니다.</p>
+            </div>
+        </div>
+    </div>
     <div id="title">
-        <span onclick="location.reload()">Color, me</span>
-        <p>나만의 색 조합을 찾아 저장할 수 있습니다.</p>
-        <p>원하는 색을 추가하고, 수정 및 삭제가 가능합니다.</p>
+        <span>Color, me</span>
+        <svg onclick="openModal();" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
     </div>
     <div id="contents">
         <div>

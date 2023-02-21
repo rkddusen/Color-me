@@ -17,22 +17,73 @@ button {
     border: none;
     cursor: pointer;
 }
+body{
+    width: 100%;
+    height: 100%;
+}
+#modal-back{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #0000009e;
+    z-index: 2;
+    overflow: hidden;
+}
+#modal{
+    position: absolute;
+    width: 500px;
+    min-height: 200px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+}
+
+#modal-top{
+    padding: 15px 20px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    align-items: baseline;
+}
+#modal-cancel{
+    font-size: 30px;
+}
+#modal-cancel:hover{
+    cursor: pointer;
+}
+
+#modal-content{
+    padding: 15px 20px;
+}
+#modal-content p{
+    margin: 10px 0;
+}
+
+
+
 
 #title{
     width: 600px;
     margin: 0 auto;
-    margin-top: 50px;
-    margin-bottom: 20px;
     padding: 0 30px;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
 #title span{
     font-weight: bold;
     font-size: 35px;
+}
+#title svg{
+    margin-left: 2px;
+}
+#title svg:hover{
     cursor: pointer;
 }
-#title p {
-    font-size: 16px;
-}
+
 #contents{
     width: 600px;
     padding: 0 30px;
@@ -192,12 +243,17 @@ button {
     body{
         text-align: center;
     }
+    #modal{
+        text-align: start;
+        font-size: 12px;
+        width: 80%;
+    }
     #title{
         width: 100%;
         box-sizing: border-box;
         padding: 0;
         min-width: 260px;
-        margin-top: 30px;
+        padding-top: 30px;
     }
     #title span{
         font-size: 30px;
